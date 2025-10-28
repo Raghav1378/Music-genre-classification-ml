@@ -38,7 +38,7 @@ import numpy as np
 import pandas as pd
 
 # Load model and feature names
-data = joblib.load("../models/xgboost_optuna_model.pkl")
+data = joblib.load("xgboost_optuna_model.pkl")
 model = data["model"]
 feature_names = data["columns"]
 
