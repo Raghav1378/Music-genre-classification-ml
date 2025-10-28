@@ -1,3 +1,37 @@
+import sys
+import streamlit as st
+
+# Helpful import wrapper so users see a clear message instead of a redacted traceback
+missing = []
+try:
+    import joblib
+except Exception as e:
+    missing.append("joblib")
+
+try:
+    import numpy as np
+except Exception:
+    missing.append("numpy")
+
+try:
+    import pandas as pd
+except Exception:
+    missing.append("pandas")
+
+# If any required library is missing, show a friendly error and stop
+if missing:
+    st.set_page_config(page_title="Dependency error")
+    st.title("⛔ Missing dependencies")
+    st.error(
+        "Your app is missing the following Python package(s):\n\n" +
+        ", ".join(missing) +
+        "\n\nInstall them locally with `pip install <package>` or add them to `requirements.txt` and redeploy."
+    )
+    st.markdown("**Quick fixes:**")
+    st.code("pip install " + " ".join(missing))
+    st.stop()
+
+# If we reach here, imports are present
 import streamlit as st
 import joblib
 import numpy as np
